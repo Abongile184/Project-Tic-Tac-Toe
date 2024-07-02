@@ -1,0 +1,351 @@
+body{
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    overflow: hidden; /* Prevent overflow on the body */
+
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#primary-container {
+    border: 2px solid #f75990;
+    border-radius: 10px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 500px;
+    height: 150px;
+}
+
+
+.answer-btn{
+    min-width: 8em;
+    padding: 10px 5px;
+    border: 2px solid  #51e2f5;
+    border-radius: 10px;
+    background: transparent;
+    color: black;
+    font-weight:900;
+    transition: transform 1.3s ease;
+    margin: 15px;
+}
+
+#ai-btn{
+    border: 2px solid  #ff1d58;
+}
+
+
+#human-btn:hover{
+    color:white;
+    background-color: #51e2f5;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#ai-btn:hover{
+    color:white;
+    background-color: #ff1d58;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#secondary-container {
+    border-radius: 10px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    max-width: 330px; /* Added max-width to prevent overflow */
+    margin: auto;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    background-color: #494D5F;
+    color:white;
+
+}
+
+#form-fill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px; /* Add some spacing below the header */
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%; /* Ensure the form takes up the full width of the container */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.player-form { 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%; /* Changed to 100% to ensure responsiveness */
+    gap: 5px;
+}
+
+.label, .input {
+    width: 100%; /* Ensure labels and inputs take up the full width of the container */
+    font-weight: 900;
+}
+
+input[type="text"] {
+    padding: 10px 10px;
+    margin: 4px 0;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    border: none;
+    background-color: #F5F5F5;
+    outline: none;
+    border-bottom: 2px solid #ccc; /* Default bottom border color */
+    transition: border-color 0.3s ease-in-out;
+}
+
+input:invalid {
+    border-bottom-color: red; /* Red border when input is invalid */
+}
+
+input:valid {
+    border-bottom-color: limegreen; /* Limegreen border when input is valid */
+}
+
+#start-game-btn {
+    align-self: center; /* Center the submit button */
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background: transparent;
+    color: white;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+#start-game-btn:hover{
+    background-color: #51e2f5;
+    border: none;
+}
+
+.player_indicator-one{
+    float: left;
+    margin-left: 30px;
+    color:red;
+    
+}
+
+.player_indicator-two{ 
+    float: right;
+    margin-right: 30px;
+    color:blue;
+}
+
+
+/* all the styling for the board */
+*, *::after, *::before{
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+
+.board{
+    width: 95%;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+    transition: z-index 1s ease, height 1s ease;
+}
+
+.cell{
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n + 1){
+    border-left: none;
+}
+
+.cell:nth-child(3n + 3){
+    border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+    border-bottom: none;
+}
+
+.x::before {
+    content: "X";
+    font-size: 3rem;
+    color: #333;
+    display: block;
+    text-align: center;
+}
+
+.circle::before {
+    content: "O";
+    font-size: 3rem;
+    color: #333;
+    display: block;
+    text-align: center;
+}
+
+.cell.x,
+.cell.circle{
+    cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before{
+    background-color: black;
+}
+
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before
+{
+    background-color: lightgrey;
+}
+
+
+/* the x mark when playing the game */
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after
+{
+    content: '';
+    position:absolute;
+    width: 120px;
+    height: 23px;
+    
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg)
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+
+/* the o mark when playing the game */
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    content: '';
+    position:absolute;
+    border-radius: 50%;
+}
+
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    content: '';
+    position: absolute;
+    width: 100px; /* Adjust to the desired size */
+    height: 100px; /* Adjust to the desired size */
+    border-radius: 50%;
+    border: 20px solid none /* Adjust to the desired thickness */
+}
+
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    content: '';
+    position: absolute;
+    width: 76px; /* Inner circle width = outer circle width - 2 * border thickness */
+    height: 76px; /* Inner circle height = outer circle height - 2 * border thickness */
+    border-radius: 50%;
+    background-color: white;
+}
+
+
+/*restart button */
+.winning-message{
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size:  5rem;
+    flex-direction: column;
+}
+
+.winning-message button{
+    font-size: 3rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: .20em .5em;
+    cursor: pointer;
+}
+
+.winning-message button:hover{
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.winning-message.show{
+    display: flex;
+}
+
+#game-results{
+    height: 150px;
+    position: relative;
+  
+}
+
+p#whoseTurnNow{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 35px;
+    font-weight: 900;
+}
+
+.footer { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    z-index: 10;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+    margin: auto 0;
+}
