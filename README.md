@@ -1,5 +1,5 @@
 # Project-Tic-Tac-Toe
-a Tic Tac Toe game you can play in your browser!
+a Tic Tac Toe game you can play in your browser! : https://abongile184.github.io/Project-Tic-Tac-Toe/
 
 1. Set up your project with HTML, CSS and Javascript files and get the Git repo all set up.
 
